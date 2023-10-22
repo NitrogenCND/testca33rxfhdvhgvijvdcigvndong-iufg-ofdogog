@@ -1,48 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Simple Chat</title>
-</head>
-<body>
-    <div id="chat-container">
-        <div id="chat-display"></div>
-        <input type="text" id="message-input" placeholder="Type your message...">
-        <button id="send-button">Send</button>
-    </div>
-
-    <script>
-        const chatDisplay = document.getElementById('chat-display');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-
-        sendButton.addEventListener('click', () => {
-            const message = messageInput.value;
-
-            if (message !== '') {
-                // Send the message to the PHP server.
-                fetch('chat.php', {
-                    method: 'POST',
-                    body: JSON.stringify({ message }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                // Clear the input field.
-                messageInput.value = '';
-            }
-        });
-
-        // Function to fetch and display messages from the server.
-        const fetchMessages = async () => {
-            const response = await fetch('chat.txt');
-            const messages = await response.text();
-            chatDisplay.innerHTML = messages;
-        };
-
-        // Fetch messages initially and set up polling for new messages.
-        fetchMessages();
-        setInterval(fetchMessages, 1000);
-    </script>
-</body>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/653561e4f2439e1631e71605/1hdc8cpe0';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </html>
