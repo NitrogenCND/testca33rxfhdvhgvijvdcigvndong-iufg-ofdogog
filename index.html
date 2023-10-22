@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chat</title>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-display"></div>
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatDisplay = document.getElementById('chat-display');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value;
+
+            if (message !== '') {
+                // Send the message to the PHP server.
+                fetch('chat.php', {
+                    method: 'POST',
+                    body: JSON.stringify({ message }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // Clear the input field.
+                messageInput.value = '';
+            }
+        });
+
+        // Function to fetch and display messages from the server.
+        const fetchMessages = async () => {
+            const response = await fetch('chat.txt');
+            const messages = await response.text();
+            chatDisplay.innerHTML = messages;
+        };
+
+        // Fetch messages initially and set up polling for new messages.
+        fetchMessages();
+        setInterval(fetchMessages, 1000);
+    </script>
+</body>
+</html>
